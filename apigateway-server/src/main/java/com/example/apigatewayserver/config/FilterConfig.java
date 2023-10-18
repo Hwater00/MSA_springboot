@@ -18,8 +18,17 @@ public class FilterConfig {
                 r.path("/first-service/**")
                         .filters(f -> f.addRequestHeader("fsreqh", "fshreqv") //필터 적용으로  자유롭게 설정한 헤더 명칭, 헤더 값을 받는다.
                                 .addResponseHeader("fsres", "fsreshv"))
-                        .uri("http://localhost:8001/")
+                        .uri("http://localhost:8081/")
             )
+
+            .route( r -> {
+                return r.path("/second-service/**")
+                        .filters(f-> f.addResponseHeader("ssresh","sshreqv")
+                                .addRequestHeader("ssreqh","sshreqv"))
+                        .uri("http://localhost:8082/");
+            })
+
             .build(); // 빌더 패턴 종료 = 라우팅 정보 등록 종료 지점
     }
 }
+
