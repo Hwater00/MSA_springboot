@@ -23,7 +23,7 @@ spring:
 #            - AddRequestHeader=fsreqhyml,fsreqhvyml
 #            - AddResponseHeader= fsreqhyml,fsreqhvyml
             - CustomFilter  # @Component이 붙어있는 필터 클래스 이름을 작성함
-
+            - LogFilter
 
         - id: second-service
           uri: http://localhost:8082/

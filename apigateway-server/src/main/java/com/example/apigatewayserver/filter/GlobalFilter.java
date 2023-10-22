@@ -41,15 +41,12 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
     }
 
 
-    @Getter
+    @Getter @Setter
     public static class Config{
         // 설정 파일에서 인자값을 넘겨받을 수 있도록 Config 이너클래스에 멤버 변수들을 선언합니다
         private String message;
         private boolean pre;
         private boolean post;
 
-        public void setPost(boolean post) {
-            this.post = post;
-        }
     }
 }
