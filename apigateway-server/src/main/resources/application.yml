@@ -6,6 +6,13 @@ spring:
     name: apigateway-server
   cloud:
     gateway:
+      default-filters:
+        - name: GlobalFilter   # Bean에 등록된 @Component가 붙은 필터 클래스명
+          # args 내부에는 Config 이너클래스 멤버 변수에게 전달할 값을 작성한다.
+          args:
+            message: Global Filter Default Message Test   #메시지명
+            pre: true        # true or false
+            post: true       # true or false
       routes:
         - id: first-service
           uri: http://localhost:8081/
@@ -24,3 +31,4 @@ spring:
             - Path=/second-service/**
           filters:
             - CustomFilter2
+
