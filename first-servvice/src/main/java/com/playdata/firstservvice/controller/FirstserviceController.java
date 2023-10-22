@@ -12,7 +12,7 @@ public class FirstserviceController {
 
 
     @GetMapping("header-check")
-    public String headerCheck(@RequestHeader("fsreqh") String header){
+    public String headerCheck(@RequestHeader("fsreqhyml") String header){
         return header;
     }
 }
