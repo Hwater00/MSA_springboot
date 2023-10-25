@@ -25,4 +25,6 @@ public class UserService {
         User user = userRepository.findUserByUuid(uuid);
         return new ResponseFindUserDto(user);
     }
+
+    
 }

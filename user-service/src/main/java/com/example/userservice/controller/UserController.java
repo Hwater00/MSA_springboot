@@ -1,6 +1,5 @@
 package com.example.userservice.controller;
 
-import com.example.userservice.domain.User;
 import com.example.userservice.dto.RequestCreateUserDto;
 import com.example.userservice.dto.ResponseFindUserDto;
 import com.example.userservice.service.UserService;

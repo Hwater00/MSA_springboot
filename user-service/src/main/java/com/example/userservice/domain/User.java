@@ -23,11 +23,11 @@ public class User {
 
     private String userId;
 
-    private String endPw;
+    private String encPw;
 
     private String uuid;
 
-    private LocalDateTime creatAt;
+    private LocalDateTime createAt;
 }
 
 // 도메인 레이어는 다른 레이어를 참조하면 안 되지만 다른 레이어에서 도메인 레이어를 참조해도 된다.
