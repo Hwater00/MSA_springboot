@@ -30,8 +30,10 @@ spring:
             - Path=/second-service/**
           filters:
             - CustomFilter2
+
+#        유저 서비스 등록
         - id: user-service
-          uri: lb://USER-SERVICE
+          uri: lb://USER-SERVICE  #직접적인 주소를 등록하지 않고 로드밸런서를 설정해서 디스커버리 유레카를 통한다.
           predicates:
             - Path=/user-service/**
 

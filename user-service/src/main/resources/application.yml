@@ -1,0 +1,36 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: user-service
+
+  # spring.profiles.active:application-[이부분 이름].yml
+  profiles:
+    active: db  #두 개 이상의 외부파일에서 받아올 때는  콤마(,)로 여러개를 나열합니다.
+
+  # MySQL 설정하기
+  datasource:
+    url: ${url}
+    username: ${username_}
+    password: ${password}
+    driver-class-name: ${driver-class-name}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
