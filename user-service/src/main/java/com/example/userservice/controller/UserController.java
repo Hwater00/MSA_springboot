@@ -5,8 +5,10 @@ import com.example.userservice.dto.ResponseFindUserDto;
 import com.example.userservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestController
 // MVC 패턴에서 @RequestMapping("user-service")가 없어도 빌드 오류가 발생하지는 않지만
@@ -29,7 +31,7 @@ public class UserController {
         // @Vaild는 사전의 지정한 양식이 맞는지 검증한 후에 역직렬화를 진행
 
         userService.creatUser(userDto);
-        return ResponseEntity.ok("회원가입완료");
+        return new ResponseEntity(HttpStatus.CREATED); // 상태코드 2001
     }
 
     // 가입된 계정을 uuid 기반으로 찾아올 수 있도록 get 요청을 만들어주세요.
@@ -40,7 +42,10 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-
+    @GetMapping("users/all")
+    public ResponseEntity<?> findAllUser(){
+        return ResponseEntity.ok(userService.findAllUser());
+    }
 
 
 }
