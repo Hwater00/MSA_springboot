@@ -1,7 +1,10 @@
 package com.example.userservice.dto;
 
+import com.example.userservice.domain.Order;
 import com.example.userservice.domain.User;
 import lombok.*;
+
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor @Builder @ToString
@@ -16,6 +19,10 @@ public class ResponseFindUserDto {
     private String name;
 
     private String userId;
+
+    // 필요하다면 구매 내역을 같이 가져올 수 있도록 처리합니다.
+    private List<Order> orderList;
+
 
     public ResponseFindUserDto(User user){
         this.id = user.getId();

@@ -29,8 +29,9 @@ public class UserService {
 
         if(user == null)
             throw  new UserNotFoundException("해당 유저는 존재하지 않습니다");
-
-        return new ResponseFindUserDto(user);
+        ResponseFindUserDto dto = new ResponseFindUserDto(user);
+        dto.setOrderList(List.of()); // List.of()로 생성된 리스트는 불변 리스트 -  읽기 전용 데이터 구조
+        return dto;
     }
 
     public List<User> findAllUser(){
