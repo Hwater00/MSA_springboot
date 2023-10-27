@@ -1,7 +1,6 @@
 package com.example.itemservice.controller;
 
 import com.example.itemservice.dto.RequestCreateItemDto;
-import com.example.itemservice.dto.ResponseBuyItemDto;
 import com.example.itemservice.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
