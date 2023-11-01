@@ -12,11 +12,21 @@ public class FirstserviceController {
     // Environment는 application.yml 파일에 매칭 시켜 놓은 값을  자바 자료로 만들어줌
     private final Environment env;
 
+    @GetMapping("config-check")
+    public String configCheck(){
+        return env.getProperty("test.value");
+    }
+
+
+
     @GetMapping("port-check")
     public String portCheck(){
         return env.getProperty("local.server.port");
         // 그냥 server.port로 기입하면 실제로 대입된 값인 0으로 출력
+
+
     }
+
 
     @RequestMapping(value="hello",method = RequestMethod.GET)
     public String hello(){
