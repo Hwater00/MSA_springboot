@@ -7,3 +7,4 @@ spring:
       server:
         git:
           uri: file://C:\DevSoo\MSABackend\config-resource
+

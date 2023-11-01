@@ -17,6 +17,10 @@ public class FirstserviceController {
         return env.getProperty("test.value");
     }
 
+    @GetMapping("github-config-check")
+    public String githubConfigCheck(){
+        return env.getProperty("food.korean");
+    }
 
 
     @GetMapping("port-check")
