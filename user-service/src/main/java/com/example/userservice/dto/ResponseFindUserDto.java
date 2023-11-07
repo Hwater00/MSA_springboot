@@ -23,7 +23,6 @@ public class ResponseFindUserDto {
     // 필요하다면 구매 내역을 같이 가져올 수 있도록 처리합니다.
     private List<Order> orderList;
 
-
     public ResponseFindUserDto(User user){
         this.id = user.getId();
         this.email =user.getEmail();

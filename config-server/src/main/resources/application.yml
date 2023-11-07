@@ -6,5 +6,6 @@ spring:
     config:
       server:
         git:
-          uri: file://C:\DevSoo\MSABackend\config-resource
+          uri: file://C:\DevSoo\config-resource
+
 

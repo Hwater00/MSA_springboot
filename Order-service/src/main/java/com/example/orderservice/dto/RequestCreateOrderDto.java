@@ -1,9 +1,7 @@
 package com.example.orderservice.dto;
 
 import com.example.orderservice.domain.Order;
-import jakarta.persistence.Column;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,6 +19,7 @@ public class RequestCreateOrderDto {
     private String userId;
 
     private String productId;
+
 
     public Order toEntity(){
         return Order.builder()

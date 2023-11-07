@@ -39,6 +39,8 @@ dependencies {
 
     // spring-cloud-starter-bootstrap
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.4'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
 
 dependencyManagement {

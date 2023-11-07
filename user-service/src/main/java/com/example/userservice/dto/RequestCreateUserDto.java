@@ -4,6 +4,7 @@ package com.example.userservice.dto;
 // 네이밍 이유 : 요청/응답 표시 + 어떤 요청(DB)
 
 import com.example.userservice.domain.User;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

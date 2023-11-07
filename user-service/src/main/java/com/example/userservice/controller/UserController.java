@@ -48,4 +48,10 @@ public class UserController {
     }
 
 
+    @GetMapping("users/{userId}/orders")
+    public ResponseEntity<?> findOrdersByUserId(@PathVariable String userId){
+        ResponseFindUserDto userDto = userService.findUserOrderList(userId);
+        return ResponseEntity.ok(userDto);
+    }
+
 }
