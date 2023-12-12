@@ -1,6 +1,7 @@
 package com.example.dblock.service;
 
 import com.example.dblock.entity.Inventory;
+import com.example.dblock.facade.OptimisticInventoryFacade;
 import com.example.dblock.repository.InventoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +14,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-class PessimisticInventoryServiceTest {
+@SpringBootTest // 통합테스트: bean 컨테이너를 다 만들고 테스트를 수행합니다.
+class OptimisticInventoryServiceTest {
+
     @Autowired
-    private PessimisticInventoryService inventoryService;
+    private OptimisticInventoryFacade inventoryService;
 
     @Autowired
     private InventoryRepository inventoryRepository;
@@ -36,7 +38,7 @@ class PessimisticInventoryServiceTest {
 
     @Test
     @DisplayName("100개의 재고를 가진 1번아이템을 1개 감소시키면 99개 남는다.")
-    public void 동시성문제가생기지않는재고감소상황(){
+    public void 동시성문제가생기지않는재고감소상황() throws InterruptedException{
         // given(없음)
 
         // when
@@ -65,7 +67,10 @@ class PessimisticInventoryServiceTest {
             executorService.submit(()->{ // 개별 스레드가 호출할 요청을 람다로 작성
                 try {
                     inventoryService.decrease(1L,1L);
-                }finally {
+                }catch (Exception e){
+
+                }
+                finally {
                     countDownLatch.countDown(); //요청이 들어간 쓰레드는 대기상태로 전환
                 }
             });
