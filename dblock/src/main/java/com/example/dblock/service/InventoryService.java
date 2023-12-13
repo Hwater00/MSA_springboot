@@ -13,9 +13,9 @@ public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
     @Transactional
-    public synchronized void decrease(Long id,long count){
+    //public synchronized void decrease(Long id,long count){
 
-//  public void decrease(Long id,long count){ // 아이템 번호와 감소시킬 개수 입력
+  public void decrease(Long id,long count){ // 아이템 번호와 감소시킬 개수 입력
         Inventory inventory = inventoryRepository.findById(id).orElseThrow();
 
         inventory.decrease(count); // 갯수 감소 수행 후
