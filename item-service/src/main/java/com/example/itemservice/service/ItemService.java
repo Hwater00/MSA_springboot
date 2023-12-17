@@ -7,6 +7,10 @@ import com.example.itemservice.dto.ResponseOrderByItemDto;
 import com.example.itemservice.feginClient.ItemtoOrderFeignClient;
 import com.example.itemservice.repository.ItemRepository;
 import com.example.itemservice.util.CustomFeignException;
+import com.example.itemservice.util.ItemProducer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,10 +21,13 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
 public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemtoOrderFeignClient orderFeignClient;
+    private final ItemProducer producer;
+
+    // 직렬화와 역직렬화를 담당하는 라이브러리
+    private final ObjectMapper objectMapper;
 
     public void createItem(RequestCreateItemDto ItemDto){
         Item saveItem = ItemDto.toEntity();
@@ -43,5 +50,16 @@ public class ItemService {
 
         // 5. 합쳐준 DTO(ResponseOrderByItemDto)를 리턴
         return itemDto;
+    }
+
+    public void publishTestMessage(String message){
+        producer.sendTestMessage(message);
+    }
+
+    public void publishCreateItemMessage(RequestCreateItemDto itemDto) throws JsonProcessingException {
+        // DTO를 json(String)으로 직렬화
+        String message = "";
+        message = objectMapper.writeValueAsString(itemDto);
+        producer.sendCreateItemMessage(message);
     }
 }

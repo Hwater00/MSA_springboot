@@ -3,6 +3,7 @@ package com.example.itemservice.controller;
 import com.example.itemservice.dto.RequestCreateItemDto;
 import com.example.itemservice.dto.ResponseOrderByItemDto;
 import com.example.itemservice.service.ItemService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -29,10 +30,12 @@ public class ItemController {
 
     // 등록 성공시 201
     @PostMapping("items")
-    public ResponseEntity<?> CreateItem(@RequestBody RequestCreateItemDto ItemDto){
-        itemService.createItem(ItemDto);
+    public ResponseEntity<?> CreateItem(@RequestBody RequestCreateItemDto ItemDto) throws JsonProcessingException {
+        // 서비스에 직접적인 처리 로직을 보내지 않고 적절한 요청인 지 확인, 메세지큐로 보내는 역할만 합니다.
+        itemService.publishCreateItemMessage(ItemDto);
+        // 메세지 큐에서 서비스로 전달하는 로직을 Cunsumer가 직접적으로 합니다.
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        return ResponseEntity.ok("메세지 생성 요청 검증 완료");
     }
 
     // 전체 아이템 조회
@@ -49,6 +52,13 @@ public class ItemController {
     public ResponseEntity<?> getOrdersByProductId(@PathVariable String productId){
         ResponseOrderByItemDto dto = itemService.findOrderByProduct(productId);
         return ResponseEntity.ok(dto);
+    }
+
+    // PathVariable을 이용해서 message를 큐에 적재할 수 있도록 엔드포인트를 직접 설정
+    @GetMapping("items/{message}/message")
+    public ResponseEntity<?> publishTestMessage(@PathVariable String message){
+        itemService.publishTestMessage(message);
+        return ResponseEntity.ok().build();
     }
 
 }
